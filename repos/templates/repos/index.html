@@ -24,6 +24,7 @@
             justify-content:center;
         }
 
+
     </style>
 </head>
 <body>
@@ -58,15 +59,6 @@
 
     {% endfor %}
 </div>
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
-</nav>
 </body>
 
 
@@ -77,22 +69,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<script>
-    $('.pagination li').on('click',function(event){
-        $.ajax({
-        url: 'http://127.0.0.1:8000/repos/',
-        type:'GET',
-        data: {
-          'page': event.target.innerText
-        },
-        dataType: 'json',
-        success: function (data) {
-            alert("A user with this username already exists.");
-        }
-      });
-
-
-    })
-</script>
 
 </html>

@@ -2,19 +2,19 @@ import requests
 from django.http.response import JsonResponse, HttpResponse
 from django.shortcuts import render
 from datetime import date as dt, timedelta, datetime
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from requests.exceptions import ConnectionError
 
 
 def index(request):
     """
     function to get all data for frontend task and render data to template
     """
-    page =1
-    print(request)
-    # if request.method == 'GET':
-    #     page=request.Get['page']
-    url = f"https://api.github.com/search/repositories?q=created:>2017-10-22&sort=stars&order=desc?page={page}&per_page=7"
-    data = requests.get(url).json()
+    url = "https://api.github.com/search/repositories?q=created:>2017-10-22&sort=stars&order=desc?page="
+    try:
+        data = requests.get(url).json()
+    except ConnectionError as e:
+        print(e)
+        data = "No response"
     return render(request, 'repos/index.html', {"data": data})
 
 
@@ -26,7 +26,11 @@ def info(request):
     """
     date = (dt.today() - timedelta(days=30)).isoformat()
     url = f"https://api.github.com/search/repositories?q=created:>{date}&sort=stars&order=desc&page=1&per_page=100"
-    data = requests.get(url).json()
+    try:
+        data = requests.get(url).json()
+    except ConnectionError as e:
+        print(e)
+        data = "No response"
     return data
 
 
