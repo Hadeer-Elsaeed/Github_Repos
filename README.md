@@ -1,11 +1,11 @@
 # Github_Repos
 
 ## For Backend Task:
- * I use postman to test all endpoints *
-- The endpoint to list the languages used by the 100 trending public repos on GitHub
+ *I use postman to test all endpoints*
+1 - The endpoint to list the languages used by the 100 trending public repos on GitHub
 http://127.0.0.1:8000/repos/languages 
 
-- The endpoint for displaying number of repos using language and list these repos 
+2 - The endpoint for displaying number of repos using language and list these repos 
   http://127.0.0.1:8000/repos/languages/<language> by replacing <language> with
   any language to search about it.
   
