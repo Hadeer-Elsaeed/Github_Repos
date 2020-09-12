@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+
+
+    <title>Github Repos</title>
+    <style>
+        .flex-container {
+          display: flex;
+          flex-wrap: wrap;
+          background-color: white;
+        }
+
+        .flex-container > div {
+          background-color: #f1f1f1;
+          margin: 10px auto;
+        }
+        .pagination{
+            display:flex;
+            justify-content:center;
+        }
+
+    </style>
+</head>
+<body>
+<div class="pos-f-t"></div>
+<nav class="navbar navbar-dark bg-dark">
+    <i class="fab fa-github fa-3x"></i>
+</nav>
+<div class="flex-container">
+    {% for item in data.items %}
+
+    <div class="card mb-3 col-5 offset-1">
+        <div class="row no-gutters">
+            <div class="col-md-4 mt-3">
+                <img src="{{item.owner.avatar_url}}" class="card-img" alt="repo avatar">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h3 class="card-title">{{item.name}}</h3>
+                    {% if item.description != None %}
+                    <h6 class="card-text">{{item.description}}</h6>
+                    {% endif %}
+                    <div>
+                        <i class="far fa-star fa-lg"></i> {{item.stargazers_count}}
+                        <i class="fas fa-exclamation-triangle fa-lg"></i> {{item.open_issues_count}}
+                    </div>
+                    <p class="card-text"><small class="text-muted">Submitted {{item.created_at}} by <span
+                            class="text-primary">{{item.owner.login}}</span></small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+</body>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script>
+    $('.pagination li').on('click',function(event){
+        $.ajax({
+        url: 'http://127.0.0.1:8000/repos/',
+        type:'GET',
+        data: {
+          'page': event.target.innerText
+        },
+        dataType: 'json',
+        success: function (data) {
+            alert("A user with this username already exists.");
+        }
+      });
+
+
+    })
+</script>
+
+</html>
