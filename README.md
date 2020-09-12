@@ -6,7 +6,7 @@
 http://127.0.0.1:8000/repos/languages 
 
 - The endpoint for displaying number of repos using language and list these repos 
-  http://127.0.0.1:8000/repos/languages/<language> by replacing <language> with
+  http://127.0.0.1:8000/repos/languages/%3Clanguage%3E by replacing <language> with
   any language to search about it.
   
   
